@@ -38,7 +38,7 @@ form.addEventListener('submit', (e) => {
     // CREATE THE DELETE BUTTON
     const cellDel = newRow.insertCell()
     const delBtn = document.createElement('button')
-    delBtn.innerText = 'X'
+    delBtn.textContent = 'X'
     delBtn.className = 'btn btn-danger btn-sm'
     cellDel.appendChild(delBtn)
 
@@ -50,7 +50,7 @@ form.addEventListener('submit', (e) => {
 
     // INCREMENENT THE NUMBER OF EMPLOYEES IN THE TABLE
     countEmployees++;
-    document.querySelector('output').innerText = `(${countEmployees})`;
+    document.querySelector('output').textContent = `(${countEmployees})`;
 
 })
 
@@ -60,10 +60,10 @@ form.addEventListener('submit', (e) => {
 
             employeeTable.deleteRow(e.target.parentElement.parentElement.rowIndex)
             countEmployees --;
-            document.querySelector('output').innerText = `(${countEmployees})`;
+            document.querySelector('output').textContent = `(${countEmployees})`;
             if (countEmployees < 1) {
                 const output = document.querySelector('output');
-                output.innerText = '';
+                output.textContent = '';
             }
         }
     })
