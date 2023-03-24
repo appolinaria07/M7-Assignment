@@ -1,6 +1,6 @@
 // GET ADD EMPLOYEE FORM AND EMPLOYEE TABLE FROM THE DOM
-let form = document.querySelector('#addForm')
-let employeeTable = document.getElementById('employees')
+const form = document.querySelector('#addForm')
+const employeeTable = document.getElementById('employees')
 
 // SET A COUNT VARIABLE TO DISPLAY NEXT TO EMPLOYEES HEADER
 let countEmployees = 0
@@ -9,42 +9,38 @@ let countEmployees = 0
 form.addEventListener('submit', (e) => {
     // PREVENT FORM SUBMISSION
     e.preventDefault()
+
     // GET THE VALUES FROM THE TEXT BOXES
     let empID = document.getElementById('id').value
-    let empName = document.getElementById('name').value
-    let empExt = document.getElementById('extension').value
-    let empEmail = document.getElementById('email').value
-    let empDepartment = document.getElementById('department').value
+    const empName = document.getElementById('name').value
+    const empExt = document.getElementById('extension').value
+    const empEmail = document.getElementById('email').value
+    const empDepartment = document.getElementById('department').value
 
     // INSERT A NEW ROW AT THE END OF THE EMPLOYEES TABLE
-    let newRow = employeeTable.insertRow()
+    const newRow = employeeTable.insertRow()
 
     // INSERT A CELL FOR EACH ITEM WITHIN THE NEW ROW
-    let cellID = newRow.insertCell()
-    let cellName = newRow.insertCell()
-    let cellExt = newRow.insertCell()
-    let cellEmail = newRow.insertCell()
-    let cellDepartment = newRow.insertCell()
+    const cellID = newRow.insertCell()
+    const cellName = newRow.insertCell()
+    const cellExt = newRow.insertCell()
+    const cellEmail = newRow.insertCell()
+    const cellDepartment = newRow.insertCell()
 
     // APPEND THE TEXT VALUES AS TEXT NODES WITHIN THE CELLS
-    empID = document.createTextNode(empID)
-    cellID.appendChild(empID)
-    empName = document.createTextNode(empName)
-    cellName.appendChild(empName)    
-    empExt = document.createTextNode(empExt)
-    cellExt.appendChild(empExt)    
-    empEmail = document.createTextNode(empEmail)
-    cellEmail.appendChild(empEmail)
-    empDepartment = document.createTextNode(empDepartment)
-    cellDepartment.appendChild(empDepartment)
+    // cellID.textContent = empID
+    cellID.appendChild(document.createTextNode(empID))
+    cellName.appendChild(document.createTextNode(empName))    
+    cellExt.appendChild(document.createTextNode(empExt))    
+    cellEmail.appendChild(document.createTextNode(empEmail))
+    cellDepartment.appendChild(document.createTextNode(empDepartment))
 
     // CREATE THE DELETE BUTTON
-    const delButton = document.createElement('button')
-    delButton.className = 'btn btn-danger btn-sm delete'
-    let x = document.createTextNode('X')
-    delButton.appendChild(x)
-    let cellDel = newRow.insertCell()
-    cellDel.appendChild(delButton)
+    const cellDel = newRow.insertCell()
+    const delBtn = document.createElement('button')
+    delBtn.innerText = 'X'
+    delBtn.className = 'btn btn-danger btn-sm'
+    cellDel.appendChild(delBtn)
 
     // RESET THE FORM
     form.reset()
@@ -54,7 +50,7 @@ form.addEventListener('submit', (e) => {
 
     // INCREMENENT THE NUMBER OF EMPLOYEES IN THE TABLE
     countEmployees++;
-    document.querySelector('output').innerHTML = `(${countEmployees})`;
+    document.querySelector('output').innerText = `(${countEmployees})`;
 
 })
 
@@ -63,14 +59,15 @@ form.addEventListener('submit', (e) => {
         if (confirm(`Are you sure you want to delete employee ${e.target.parentElement.parentElement.children[1].innerText}?`)) {
 
             employeeTable.deleteRow(e.target.parentElement.parentElement.rowIndex)
-            countEmployees -= 1;
-            document.querySelector('output').innerHTML = `(${countEmployees})`;
-            if (countEmployees === 0) {
-                let output = document.querySelector('output');
-                output.innerHTML = '';
+            countEmployees --;
+            document.querySelector('output').innerText = `(${countEmployees})`;
+            if (countEmployees < 1) {
+                const output = document.querySelector('output');
+                output.innerText = '';
             }
         }
     })
 
-    
+
+
 
